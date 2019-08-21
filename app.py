@@ -195,7 +195,7 @@ app.layout = html.Div(children=[
                         7: {'label': 'Hyper-Semi-sextile',  'style':{'color':'#2ff72c'}},
                     },
                     value=2,
-                className = 'eight columns'),
+                className = 'seven columns'),
             style={'margin-top':20, 'margin-bottom':0, 'margin-left':30}),
         ], className='row', style={'margin-left':30, 'margin-bottom':40}),
         html.Br(),
@@ -222,7 +222,7 @@ app.layout = html.Div(children=[
         html.Br(),
         html.Footer(
             html.Center(
-            dcc.Markdown('''[Cataphysical Research Society - 2019.](https://cataphysical-research-society.herokuapp.com)''')),
+            dcc.Markdown('''[Cataphysical Research Society - 2019](https://cataphysical-research-society.herokuapp.com)''')),
         ),
         html.Br(),
         html.Br(),
