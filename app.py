@@ -97,7 +97,7 @@ about = '''Astrological aspects are the names given to the various angles that t
  
 seit= '''How to Manually Filter Results:
      
-  With the filter off, the app will return results for every starsign in consequitive order, including results which are - for our purposes - undesired. So for example, if the slider was set to Square and the native sign was 'scorpio', the we would get a list that might look like this; 'scorpio', 'aquarius', 'taurus', 'leo', scorpio', 'aquarius', 'taurus', 'leo'. However, if the slider is set to Hyper-Square, then the list will look exactly the same; ('scorpio'), 'aquarius', 'taurus', ('leo'), scorpio', 'aquarius', ('taurus'), 'leo', scorpio', ('aquarius'). The signs with the brackets are the ones you are after, in this case. You can use the above radar chart to help you, but a quick rule of thumb is to skip 5 signs for a hyper-quintile, 7 for a hyper-sextile, 8 for a hyper-trine, 9 for a hyper-square and 11 for a hyper-sextile.
+  With the filter off, the app will return results for every starsign in consequitive order, including results which are - for our purposes - undesired. So for example, if the slider was set to Square and the native sign was 'scorpio', then we would get a list that might look like this; 'scorpio', 'aquarius', 'taurus', 'leo', scorpio', 'aquarius', 'taurus', 'leo'. However, if the slider is set to Hyper-Square, then the list will look exactly the same; ('scorpio'), 'aquarius', 'taurus', ('leo'), scorpio', 'aquarius', ('taurus'), 'leo', scorpio', ('aquarius'). The signs with the brackets are the ones you are after, in this case. You can use the above radar chart to help you, but a quick rule of thumb is to skip 5 signs for a hyper-quintile, 7 for a hyper-sextile, 8 for a hyper-trine, 9 for a hyper-square and 11 for a hyper-sextile.
   '''
 
 def dropdlist():
@@ -195,7 +195,7 @@ app.layout = html.Div(children=[
                         7: {'label': 'Hyper-Semi-sextile',  'style':{'color':'#2ff72c'}},
                     },
                     value=2,
-                className = 'seven columns'),
+                className = 'eight columns'),
             style={'margin-top':20, 'margin-bottom':0, 'margin-left':30}),
         ], className='row', style={'margin-left':30, 'margin-bottom':40}),
         html.Br(),
@@ -222,7 +222,7 @@ app.layout = html.Div(children=[
         html.Br(),
         html.Footer(
             html.Center(
-            dcc.Markdown('''[Cataphysical Research Society - 2019.](cataphysical-research-society.herokuapp.com)''')),
+            dcc.Markdown('''[Cataphysical Research Society - 2019.](https://cataphysical-research-society.herokuapp.com)''')),
         ),
         html.Br(),
         html.Br(),
