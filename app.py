@@ -31,7 +31,7 @@ app.index_string = '''
     <head>
     <meta charset="utf-8">
 
-    <title>Hyper-Astrological Aspects</title>
+    <title>Hyper-Astrology</title>
         {%favicon%}
         {%css%}
 
@@ -210,7 +210,7 @@ app.layout = html.Div(children=[
     html.Div([
         html.H3('Hyper-dimensional Astrological Aspect Results', style={'margin-top':-5}, className = 'five columns'),
         html.Div(id='drop-filter', className="three columns offset-by-two"),
-        html.Button('Calculate', id='button', style={'background-color': '#fef504'}, className = 'two columns'),
+        html.Button('Calculate', id='button', style={'background-color': '#2ff72c'}, className = 'two columns'),
     ], className = "row"),
     html.Div([
         html.Div(id='data_base', style={'margin-top': 40, 'margin-bottom':0}),
@@ -288,21 +288,16 @@ def stars(days, mydropdown, years):
     f = months.index(mydropdown)
     dates = f+1
     d = datetime.datetime.now()
-    f = []
-    f.append(d)
-    f = str(f)
-    g = f.replace('[datetime.datetime(', '')
-    year0 = g[:4]
-    year = int(year0)
-    year2 = year+2
+    year = d.year
+    year2 = year+1
     days=int(days)
     return dcc.DatePickerRange(
         id='date-range',
-        end_date=dt(2021, 2, 8),
+        end_date=dt(year2, 1, 14),
         start_date=dt(year, dates, days),
         min_date_allowed=dt(1800, 1, 1),
         max_date_allowed=dt(2099, 12, 31),
-        initial_visible_month=dt(year2, 2, 8),
+        initial_visible_month=dt(year2, 1, 14),
     className="four columns"),
     print(end_date[0])
 
@@ -700,6 +695,15 @@ def update_graph3(slider, intersign):
     gsign=ssigns.index(intersign)
     signs=ssigns[gsign-3:gsign+10]
     theta = signs[:]
+    
+    def rabout():
+        colorway=['#32a332', '#d72e2f', '#9467bd', '#3282ba', '#ff7f0e']
+        if slider in range(4, 7):
+            colorway=colorway[::-1]
+            return(colorway)
+        else:
+            return(colorway)
+    
     if slider == 1:
         data = [go.Scatterpolar(
           r =  [29, 25, 29, 50, 29],
@@ -846,6 +850,7 @@ def update_graph3(slider, intersign):
           range = [0, 50]
         )
       ),
+      colorway=rabout(),
       margin= {
         "b": 49, 
         "r": 72, 
@@ -854,7 +859,7 @@ def update_graph3(slider, intersign):
       },
       showlegend = False,
     )
-    
+
     fig = go.Figure(data=data, layout=layout)
     return(fig)
 
