@@ -41,7 +41,6 @@ app.index_string = '''
     <footer>
         {%config%}
         {%scripts%}
-        {%renderer%}
     </footer>
     </body>
 </html>
@@ -86,17 +85,17 @@ planeta={'moon': 'Moon: The Moon rules the human soul and its unconsciousness de
 about = '''Astrological aspects are the names given to the various angles that the planets can make in the sky in relation to star signs and to one another. Anyone who is familiar with these aspects will have heard of Trines (120 degrees), Squares (90 degrees), Sextiles (60 degrees), and Semi-Sextiles (30 degrees). However, fewer of you will have heard of quintiles (75 degrees), septiles(51°26’ ), noniles(40 degrees) or noviles, as they are sometimes called. Each of these aspects partitions the circle into smaller and smaller subsections, but I thought; “Wouldn’t it be wonderful, if we could create new aspects that were larger than the circle round and, in effect, modular (or hyper-dimensional).”
 
  With that goal in mind, I set about making the Hyper Astrology app, which is supposed to calculate these new aspects for you!
- 
+
  Hyper-dimensional aspects extend around the circle and often take several years to complete. They aren’t like ordinary aspects, which have a direct relation to the position of the ascendant star sign, or the other celestial bodies, as the angles generated are abstract or, even, metaphorical. However, I believe that these new aspects do have a bearing on the nature of Mankind, by way of twisting space around the Earth (or the Sun, if you prefer).
- 
+
  Now, I know the concept of warped or twisted space is outlandish, but what isn’t at all outlandish is the idea that the planets above our heads and their motions have a marked effect on our daily lives. And now, for the first time, we can figure out what they are.
- 
+
  You might be wondering what the little button in the corner; marked ‘Do not filter my results” is. That’s a very good question. The button is disabled by default. However, if you select any hyper-dimensional aspect, it will give you the option to switch off the filter. This option is recommended, as the filter is still in beta mode and can produce unexpected results.
- 
+
  With the filter off, you will have to proceed manually (See note at bottom of page), which is the best course of action, because then you will be able to see results for the retrograde motion of the planets, which the filter currently isn’t calibrated to deal with.'''
- 
+
 seit= '''How to Manually Filter Results:
-     
+
   With the filter off, the app will return results for every starsign in consequitive order, including results which are - for our purposes - undesired. So for example, if the slider was set to Square and the native sign was 'scorpio', then we would get a list that might look like this; 'scorpio', 'aquarius', 'taurus', 'leo', scorpio', 'aquarius', 'taurus', 'leo'. However, if the slider is set to Hyper-Square, then the list will look exactly the same; ('scorpio'), 'aquarius', 'taurus', ('leo'), scorpio', 'aquarius', ('taurus'), 'leo', scorpio', ('aquarius'). The signs with the brackets are the ones you are after, in this case. You can use the above radar chart to help you, but a quick rule of thumb is to skip 5 signs for a hyper-quintile, 7 for a hyper-sextile, 8 for a hyper-trine, 9 for a hyper-square and 11 for a hyper-sextile.
   '''
 
@@ -109,14 +108,13 @@ def dropdlist():
 colors = {
     'background': '#2b2b2c',
 }
-        
+
 app.layout = html.Div(children=[
     html.Div([
         html.Br(),
-        html.H1('Hyper Astrology', style={'font-size': 120, 'color':'#2ff72c', 'margin-top': -10, 'margin-bottom': -30, 'float':'left'},
-        className='eight columns'),
-        html.Img(src='/assets/crs-logo-hype.jpg', style={'width': '17%', 'margin-bottom': -30, 'margin-top': -15,  'margin-left': 165}, 
-        className='four columns'),
+        html.H1('Hyper Astrology', style={ 'font-size': 100,  'margin-top': 15}, 
+      className = "nine columns"),
+        html.Img(src='/assets/crs-logo-hype.jpg', className = 'three columns', style={'width': '15%', 'float': 'right', 'margin-right': 5, 'z-index': 1, 'margin-top': -15}),
         html.Hr(style={'width':'49%', 'margin-top': -35},
         className='eight columns'),
         html.H5('The Hyper-dimensional Aspects of the Stars', style={'margin-top': -30, 'margin-bottom': 30},
@@ -299,30 +297,27 @@ def stars(days, mydropdown, years):
         max_date_allowed=dt(2099, 12, 31),
         initial_visible_month=dt(year2, 1, 14),
     className="four columns"),
-    print(end_date[0])
 
-   
 @app.callback(Output('inter-aspect', 'children'),
                         [Input('inter-sign', 'children'),
                         Input('button', 'n_clicks')],
                         state = [State('days', 'value'),
                         State('my-dropdown', 'value'),
                         State('years', 'value'),
-                        State('slider', 'value')])                        
+                        State('slider', 'value')])
 def aspect(intersign, n_clicks, days, mydropdown, years, slider):
     # Find the position of the sun with respect to user's birthdate
     if days != None and years != None:
         url = 'https://horoscopes.astro-seek.com/astrology-ephemeris-' + str(mydropdown) + '-' + str(years)
-        print(url)
         html = urlopen(url)
-        
+
         soup = BeautifulSoup(html, 'lxml')
-    
+
         table = soup.findAll('table')
         df = pd.read_html(str(table))
         df= (df[0].to_json(orient='split'))
         df = pd.read_json(df, orient='split')
-        
+
         df1 = df.loc[df[0] == str(days)].values.tolist()
         df2=df1[0]
         df3 = (df2[3])
@@ -335,7 +330,6 @@ def aspect(intersign, n_clicks, days, mydropdown, years, slider):
         for i in df4:
             gf = int(i)
             df7.append(gf)
-        print(df4)
         # Find the degree of the planet in terms of its corresponding hyper-geometric aspect
         if slider == 1:
             degs = [0, 120, 240, 360]
@@ -374,7 +368,6 @@ def aspect(intersign, n_clicks, days, mydropdown, years, slider):
                         Input('date-range', 'start_date'),
                         Input('date-range', 'end_date')])
 def update_graph(radio, days, mydropdown, years, interaspect, start_date, end_date):
-    print(interaspect[1:-1])
     #Create Url list for use in search
     try:
         end_date = datetime.datetime.strptime(end_date, "%Y-%m-%d")
@@ -388,27 +381,27 @@ def update_graph(radio, days, mydropdown, years, interaspect, start_date, end_da
     delta = int(end_date.year - start_date.year)+1
     months2 = months * delta
     lenmo=(len(months2))
-    
+
     list1=[]
     while len(list1) < lenmo:
         list1.append(start_date.year)
-    
+
     list2=[]
     for idx, val in enumerate(list1):
         idx2 = idx // 12
         val2 = val + idx2
         list2.append(str(val2))
-    
-        
+
+
     totalists = list(zip(months2, list2))
-    
+
     urls=[]
     for idx, val in enumerate(totalists):
         totalist2=totalists[idx]
         url =  'https://horoscopes.astro-seek.com/astrology-ephemeris-' + totalist2[0] + '-' + totalist2[1]
         urls.append(url)
 
-    
+
     if delta == 1:
         s = months2.index(j)
         st = urls[s:end_date.month]
@@ -426,9 +419,9 @@ def update_graph(radio, days, mydropdown, years, interaspect, start_date, end_da
     for url in st:
         # Get a list of starsigns and positions
         html = urlopen(url)
-        
+
         soup = BeautifulSoup(html, 'lxml')
-        
+
         type5 = soup.findAll(attrs={'class':'udaj_planeta'})
         type5.append(0)
         type6 = np.array(type5)
@@ -490,7 +483,7 @@ def update_graph(radio, days, mydropdown, years, interaspect, start_date, end_da
     info=[]
     del signs[:start_date.day-1]
     del pos[:start_date.day-1]
-    
+
     # make position list useable
     if radio == 'moon' or radio == 'merc' or radio=='sun':
         pos2=[int(x) for x in pos]
@@ -503,9 +496,7 @@ def update_graph(radio, days, mydropdown, years, interaspect, start_date, end_da
 
     # find ranges of starsigns traversed by planets
     # find indices for splicing
-    print(pos2)
     signs1 = np.array(signs)
-    print(signs1)
     gen3=[]
     siop=[]
     e12=[]
@@ -530,13 +521,12 @@ def update_graph(radio, days, mydropdown, years, interaspect, start_date, end_da
     for idx, val in enumerate(siop5):
         if val != 1:
             siop6.append(idx)
-    
-    e13 = [val for sublist in e12 for val in sublist] 
-    gen4 = [val for sublist in gen3 for val in sublist] 
-    print(siop4)
-    print(siop6)
+
+    e13 = [val for sublist in e12 for val in sublist]
+    gen4 = [val for sublist in gen3 for val in sublist]
+
     # splice indices
-    
+
     lensi=len(siop6)
     jj=0
     kk=1
@@ -559,10 +549,10 @@ def update_graph(radio, days, mydropdown, years, interaspect, start_date, end_da
         zaa.append(star3)
         zax0.append(muv)
         jj+=1
-        kk+=1        
+        kk+=1
 
     # starsigns ranges
-    
+
     e13=[]
     for i in zaa:
         e13.append(i[0])
@@ -626,7 +616,7 @@ def update_graph(radio, days, mydropdown, years, interaspect, start_date, end_da
 
     zax9 = [val for sublist in zax6 for val in sublist]
     pos12 = [val for sublist in pos7 for val in sublist]
-    
+
     zax6=[]
     zax7=[]
     for i in range(len(pos12)-1):
@@ -640,7 +630,7 @@ def update_graph(radio, days, mydropdown, years, interaspect, start_date, end_da
     # evaluate if the users position is in range
     gen2=[]
     for i in tren:
-        pos22=pos12[i[0]:i[1]] 
+        pos22=pos12[i[0]:i[1]]
         lex4 = len(pos22)
         pos33 = []
         pos33.append(interaspect[-1])
@@ -675,7 +665,6 @@ def update_graph(radio, days, mydropdown, years, interaspect, start_date, end_da
     for i in scorp:
         d = start_date+timedelta(days=(i))
         dates.append(d)
-    print(dates)
     z = len(dates)
     four=[]
     four.append(z)
@@ -695,7 +684,7 @@ def update_graph3(slider, intersign):
     gsign=ssigns.index(intersign)
     signs=ssigns[gsign-3:gsign+10]
     theta = signs[:]
-    
+
     def rabout():
         colorway=['#32a332', '#d72e2f', '#9467bd', '#3282ba', '#ff7f0e']
         if slider in range(4, 7):
@@ -703,7 +692,7 @@ def update_graph3(slider, intersign):
             return(colorway)
         else:
             return(colorway)
-    
+
     if slider == 1:
         data = [go.Scatterpolar(
           r =  [29, 25, 29, 50, 29],
@@ -852,9 +841,9 @@ def update_graph3(slider, intersign):
       ),
       colorway=rabout(),
       margin= {
-        "b": 49, 
-        "r": 72, 
-        "t": 20, 
+        "b": 49,
+        "r": 72,
+        "t": 20,
         "pad": 0
       },
       showlegend = False,
@@ -887,9 +876,7 @@ def update_data(intermediatevalue3, radio, slider, interaspect, mydropdown2):
     y1 = interaspect[1:-1]
     y1=y1[:-1]
     dates=intermediatevalue3[1:g+1]
-    print(dates)
     signs=intermediatevalue3[g+1:]
-    print(signs)
     base=intermediatevalue3[-1]
     planet = radio
     det=zip(dates, signs)
@@ -900,11 +887,10 @@ def update_data(intermediatevalue3, radio, slider, interaspect, mydropdown2):
     kel = g*2+1
     dax = range(1, 3)
     if slider in dax:
-        print(df1)
         return html.Table(
             # Header
             [html.Tr([html.Th(col) for col in df1.columns])] +
-    
+
             # Body
             [html.Tr([
                 html.Td(df1.iloc[i][col]) for col in df1.columns
@@ -919,9 +905,8 @@ def update_data(intermediatevalue3, radio, slider, interaspect, mydropdown2):
             for i in df2['Signs']:
                 light.append(df2['Signs'][i])
                 sim.append(df2['Dates'][i])
-            
+
             top = (len(sim))
-            print(light)
             if slider == 5:
                 loe = 3
             elif slider == 6:
@@ -940,16 +925,15 @@ def update_data(intermediatevalue3, radio, slider, interaspect, mydropdown2):
                 steel.append(card)
                 card2 = sim[idx::loe]
                 glass.append(card2)
-    
-            
+
+
             chi = len(steel)//2
-                    
+
             if len(y1) != len(steel[0]):
                 if len(y1) < len(steel[0]):
                     zen = len(steel[0])//len(y1)
                 else:
                     zen = len(y1)//len(steel[0])
-                print(zen)
                 if zen >= 1:
                     y2 = y1*zen
                     y3 = y2[:len(steel[0])]
@@ -957,15 +941,15 @@ def update_data(intermediatevalue3, radio, slider, interaspect, mydropdown2):
                     y3 = y1[:len(steel[0])]
             else:
                 y3=y1
-            
+
             y4 = np.array(y3)
             steel = np.array(steel)
-            
+
             cop = list(range(1, chi))
             cos = [i*-1 for i in cop]
             com = [ [cop[i], cos[i]] for i in range(len(cop)) ]
             com2 = [k for z in com for k in z]
-                        
+
             torz=[]
             torz2=[]
             go=0
@@ -995,22 +979,20 @@ def update_data(intermediatevalue3, radio, slider, interaspect, mydropdown2):
             det2=zip(torz2, torz)
             df = pd.DataFrame(det2, columns=['Dates', 'Signs'])
             kel=(len(torz))
-            print(df)
             return html.Table(
                 # Header
                 [html.Tr([html.Th(col) for col in df.columns])] +
-        
+
                 # Body
                 [html.Tr([
                     html.Td(df.iloc[i][col]) for col in df.columns
                 ]) for i in range(min(len(df), kel))],
             )
         else:
-            print(df1)
             return html.Table(
                 # Header
                 [html.Tr([html.Th(col) for col in df1.columns])] +
-        
+
                 # Body
                 [html.Tr([
                     html.Td(df1.iloc[i][col]) for col in df1.columns
