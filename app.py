@@ -202,7 +202,7 @@ app.layout = html.Div(children=[
                         4: {'label': 'Hyper-Septile',  'style':{'color':'#2ff72c'}},
                         5: {'label': 'Hyper-Square',  'style':{'color':'#2ff72c'}},
                         6: {'label': 'Hyper-Trine',  'style':{'color':'#2ff72c'}},
-                        7: {'label': 'Hyper-Semisex',  'style':{'color':'#2ff72c'}},
+                        7: {'label': 'H-Semisex',  'style':{'color':'#2ff72c'}},
                     },
                     value=2),
             style={'margin-top':20, 'width':'60', 'margin-left':30}),
