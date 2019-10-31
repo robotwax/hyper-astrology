@@ -116,7 +116,7 @@ app.layout = html.Div(children=[
         html.Img(src='/assets/crs-logo-hype.jpg', className = 'three columns', style={'width': '15%', 'margin-top': -15}),
         html.H1('Hyper Astrology', style={ 'font-size': 90,  'margin-top': 30},
       className = "nine columns"),
-        html.Hr(style={'margin-top': -10},
+        html.Hr(style={'margin-top': 10},
     className='nine columns'),
         html.H5('The Hyper-dimensional Aspects of the Stars', style={'margin-bottom': 30},
         className='nine columns'),
