@@ -113,13 +113,13 @@ colors = {
 app.layout = html.Div(children=[
     html.Div([
         html.Br(),
-        html.H1('Hyper Astrology', style={ 'font-size': 100,  'margin-top': 15}, 
+        html.Img(src='/assets/crs-logo-hype.jpg', className = 'three columns', style={'width': '15%', 'margin-top': -15}),
+        html.H1('Hyper Astrology', style={ 'font-size': 90,  'margin-top': 30},
       className = "nine columns"),
-        html.Img(src='/assets/crs-logo-hype.jpg', className = 'three columns', style={'width': '15%', 'float': 'right', 'margin-right': 5, 'z-index': 1, 'margin-top': -15}),
-        html.Hr(style={'width':'49%', 'margin-top': -35},
-        className='eight columns'),
-        html.H5('The Hyper-dimensional Aspects of the Stars', style={'margin-top': -30, 'margin-bottom': 30},
-        className='eight columns'),
+        html.Hr(style={'margin-top': 0},
+    className='nine columns'),
+        html.H5('The Hyper-dimensional Aspects of the Stars', style={'margin-top': 0, 'margin-bottom': 30},
+        className='nine columns'),
     ], className = "row"),
     html.Hr(style={'margin-bottom': -20}),
     html.Div(id="inter-sign", style={'display': 'none'}),
@@ -128,14 +128,11 @@ app.layout = html.Div(children=[
     html.Div(id="intermediate-value4", style={'display': 'none'}),
     html.Div(style={'backgroundColor': colors['background']}, children=[
         html.Br(),
-        html.P('Input your Birthdate: Month DD YYYY', style={'color':'#abe2fb', 'font-family': 'arial', 'size': 14, 'margin-left':30}),
         html.Div([
-             html.Label('Month', className="two columns", style={'margin-left':30, 'color':'#2ff72c'}),
-             html.Label('Day', className="two columns", style={'margin-left':15, 'color':'#2ff72c'}),
-             html.Label('Year', className="two columns", style={'margin-left':25, 'color':'#2ff72c'}),
-             html.Label('Select a Planet',  style={'color':'#2ff72c'}, className="six columns"),
-        ], style={ 'margin-bottom':0}, className = "row"),
+            html.P('Input your Birthdate: Month DD YYYY', style={'color':'#abe2fb', 'font-family': 'arial', 'size': 14, 'margin-left':30}),
+        ], className = "row"),
         html.Div([
+            html.P('Month', style={'margin-left':30, 'color':'#2ff72c'}),
             dcc.Dropdown(
                 id='my-dropdown',
                 options=[{'label': 'january', 'value': 'january'},
@@ -151,15 +148,26 @@ app.layout = html.Div(children=[
                     {'label': 'november', 'value': 'november'},
                     {'label': 'december', 'value': 'december'},
                 ],
-                value='january', className="two columns", style={'margin-left':15}),
+                value='january', style={'width':'50%', 'margin-left':15}),
+        ], className = "row"),
+        html.Div([
+             html.P('Day', style={'margin-left':30, 'color':'#2ff72c'}),
             dcc.Input(id='days',
                 type='text',
                 value=13,
-            className="two columns", style={'margin-left':30}),
+             style={'width':'15', 'margin-left':30}),
+            ], className = "row"),
+        html.Div([
+             html.P('Year', style={'margin-left':30, 'color':'#2ff72c'}),
             dcc.Input(id='years',
                 type='text',
                 value=2015,
-            className="two columns", style={'margin-left':30}),
+            style={'width':'15', 'margin-left':30}),
+        ], className = "row"),
+        html.Div([
+            html.Label('Select a Planet',  style={'color':'#abe2fb', 'margin-left':30, 'margin-top':20, 'margin-bottom':20}, className="six columns"),
+        ], className = "row"),
+        html.Div([
             dcc.RadioItems(id='radio',
                 options=[
                     {'label': 'Sun', 'value': 'sun'},
@@ -170,15 +178,19 @@ app.layout = html.Div(children=[
                     {'label': 'Jupiter', 'value': 'jupiter'},
                     {'label': 'Saturn', 'value': 'saturn'},
                 ],
-                value='ven', labelStyle={'display': 'inline-block', 'color':'#2ff72c'}, className="six columns", style={'margin-left':35}),
+                value='ven', labelStyle={'display': 'inline-block', 'color':'#2ff72c'}, style={'margin-left':30}),
         ], className = "row"),
         html.Br(),
         html.Div([
-             html.Label('Pick a date range', className="four columns"),
-             html.Label('Astrological Aspect'),
-        ], style={ 'margin-bottom':0, 'color':'#2ff72c', 'margin-left':30}, className = "row"),
+             html.Label('Pick a date range',  style={'color':'#abe2fb'}),
+        ], className='row', style={'margin-left':30, 'margin-bottom':20}),
         html.Div([
-            html.Div(id='container'),
+             html.Div(id='container'),
+        ], className='row', style={'margin-left':30, 'margin-bottom':30}),
+        html.Div([
+             html.Label('Astrological Aspect', style={'color':'#abe2fb'}),
+        ], style={ 'margin-bottom':0, 'color':'#2ff72c', 'margin-left':30, 'margin-bottom':20}, className = "row"),
+        html.Div([
             html.Div(
                 dcc.Slider(
                     min=1,
@@ -191,19 +203,18 @@ app.layout = html.Div(children=[
                         4: {'label': 'Hyper-Septile',  'style':{'color':'#2ff72c'}},
                         5: {'label': 'Hyper-Square',  'style':{'color':'#2ff72c'}},
                         6: {'label': 'Hyper-Trine',  'style':{'color':'#2ff72c'}},
-                        7: {'label': 'Hyper-Semi-sextile',  'style':{'color':'#2ff72c'}},
+                        7: {'label': 'Hyper Semisextile',  'style':{'color':'#2ff72c'}},
                     },
-                    value=2,
-                className = 'seven columns'),
-            style={'margin-top':20, 'margin-bottom':0, 'margin-left':30}),
-        ], className='row', style={'margin-left':30, 'margin-bottom':40}),
+                    value=2),
+            style={'margin-top':20, 'margin-left':30, 'margin-right':50}),
+        ], className='row', style={'margin-bottom':40}),
         html.Br(),
     ]),
     html.Hr(style={'margin-top': 0}),
     html.H3('Hyper Astrological Aspects'),
     html.Div([
         dcc.Graph(id='plot', style={'height': '90vh','margin-left':40},  className="six columns"),
-        html.Textarea(id='text_box', readOnly = 'True', style={'width': '40%',  'height': '75vh',  'padding-top': 20, 'padding-bottom': 40, 'background-color': '#ffffff', 'border-radius': 1,  'resize': 'none', 'font-family': 'arial', 'size': 14, 'border-color': 'black', 'margin-top': 40, 'margin-right': 0}, className="five columns"),
+        html.Textarea(id='text_box', readOnly = 'True', style={'height': '75vh',  'padding-top': 20, 'padding-bottom': 40, 'background-color': '#ffffff', 'border-radius': 1,  'resize': 'none', 'font-family': 'arial', 'size': 14, 'border-color': 'black', 'margin-top': 40, 'margin-right': 0}, className="five columns"),
     ], className = "row"),
     html.Hr(style={'margin-top': 0}),
     html.Div([
@@ -296,8 +307,8 @@ def stars(days, mydropdown, years):
         start_date=dt(year, dates, days),
         min_date_allowed=dt(1800, 1, 1),
         max_date_allowed=dt(2099, 12, 31),
-        initial_visible_month=dt(year2, 1, 14),
-    className="four columns"),
+        initial_visible_month=dt(year2, 1, 14)
+    ),
 
 @app.callback(Output('inter-aspect', 'children'),
                         [Input('inter-sign', 'children'),
