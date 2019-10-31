@@ -206,7 +206,7 @@ app.layout = html.Div(children=[
                         7: {'label': 'Hyper Semisextile',  'style':{'color':'#2ff72c'}},
                     },
                     value=2),
-            style={'margin-top':20, 'margin-left':30, 'margin-right':-30}),
+            style={'margin-top':20, 'margin-left':30, 'margin-right':60}),
         ], className='row', style={'margin-bottom':40}),
         html.Br(),
     ]),
