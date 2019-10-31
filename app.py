@@ -131,7 +131,7 @@ app.layout = html.Div(children=[
             html.P('Input your Birthdate: Month DD YYYY', style={'color':'#abe2fb', 'font-family': 'arial', 'size': 14, 'margin-left':30}),
         ], className = "row"),
         html.Div([
-            html.P('Month', style={'margin-left':30, 'color':'#2ff72c'}),
+            html.Label('Month', style={'margin-left':30, 'color':'#2ff72c'}),
             dcc.Dropdown(
                 id='my-dropdown',
                 options=[{'label': 'january', 'value': 'january'},
@@ -150,14 +150,14 @@ app.layout = html.Div(children=[
                 value='january', style={'width':'50%', 'margin-left':15}),
         ], className = "row"),
         html.Div([
-             html.P('Day', style={'margin-left':30, 'color':'#2ff72c'}),
+            html.Label('Day', style={'margin-left':30, 'color':'#2ff72c'}),
             dcc.Input(id='days',
                 type='text',
                 value=13,
              style={'width':'15', 'margin-left':30}),
             ], className = "row"),
         html.Div([
-             html.P('Year', style={'margin-left':30, 'color':'#2ff72c'}),
+            html.Label('Year', style={'margin-left':30, 'color':'#2ff72c'}),
             dcc.Input(id='years',
                 type='text',
                 value=2015,
@@ -188,7 +188,7 @@ app.layout = html.Div(children=[
         ], className='row', style={'margin-left':30, 'margin-bottom':30}),
         html.Div([
              html.Label('Astrological Aspect', style={'color':'#abe2fb'}),
-        ], style={ 'margin-bottom':0, 'color':'#2ff72c', 'margin-left':30, 'margin-bottom':20}, className = "row"),
+        ], style={'margin-left':30, 'margin-bottom':20}, className = "row"),
         html.Div([
             html.Div(
                 dcc.Slider(
@@ -202,11 +202,11 @@ app.layout = html.Div(children=[
                         4: {'label': 'Hyper-Septile',  'style':{'color':'#2ff72c'}},
                         5: {'label': 'Hyper-Square',  'style':{'color':'#2ff72c'}},
                         6: {'label': 'Hyper-Trine',  'style':{'color':'#2ff72c'}},
-                        7: {'label': 'H-Semisex',  'style':{'color':'#2ff72c'}},
+                        7: {'label': 'Hyper-Semisextile',  'style':{'color':'#2ff72c'}},
                     },
                     value=2),
-            style={'margin-top':20, 'width':'60', 'margin-left':30}),
-        ], className='row', style={'margin-bottom':40, 'margin-right':30}),
+            style={'margin-top':20, 'width':'60%', 'margin-left':30}),
+        ], className='row', style={'margin-bottom':40}),
         html.Br(),
     ]),
     html.Hr(style={'margin-top': 0}),
